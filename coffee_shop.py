@@ -74,7 +74,9 @@ def resource_check(requirements):
         return True
     
 def brewing(kaffee):
-    
+    for i in kaffee:
+        stock[i] -= kaffee[i]
+        print("Here is your Kaffee")
 
 
 main()
