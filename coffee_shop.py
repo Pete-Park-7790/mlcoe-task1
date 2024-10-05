@@ -67,7 +67,11 @@ def main():
 
 
 def resource_check(requirements):
-    
+    for i in requirements:
+        if requirements[i] > resource[i]:
+            print(f"Oops,not sufficient {i}")
+            return False
+        return True
     
 def brewing(kaffee):
     
