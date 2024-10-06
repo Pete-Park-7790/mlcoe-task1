@@ -31,6 +31,20 @@ recipe = {
     },
 }
 
+# ANSI escape codes for colors
+RED = "\033[91m"
+GREEN = "\033[92m"
+YELLOW = "\033[93m"
+BLUE = "\033[94m"
+DEEP = "\033[38;5;160m"
+GOLD = "\033[38;5;214m"
+ORANGE = "\033[38;5;202m"
+RESET = "\033[0m"  # Reset color to default
+DARK = "\033[31m"
+MUSTARD = "\033[38;5;190m"
+
+
+
 # Variable to track total earnings
 earning = 0
 
@@ -45,26 +59,25 @@ stock = {
 # Main function to start and control the coffee machine
 def main():
     global earning      
-    stat = input("Type 'On' to start the machine.\n")   # Ask user to turn on the machine
-
+    stat = input(f"{YELLOW}Type {DEEP}'On'{YELLOW} to start the machine.\n{DEEP}")   # Ask user to turn on the machine
     # Loop continues as long as the machine is 'On'
     while stat.lower() == "on":
 
         # Ask user to choose an option from the menu
-        choice = input("Select from a variety of options:\nLatte\nEspresso\nCappuccino\nStock\nAsset\nOff\n")
+        choice = input(f"{YELLOW}Select from a variety of options:{RED}\nLatte\nEspresso\nCappuccino\nStock\nAsset\nOff\n\n{MUSTARD}")
 
         if choice.lower() == "off":     # If user chooses 'Off', stop the machine
             stat = "Off"
-            print("Turning off the machine...\nHave a nice day... :)")
+            print(f"{ORANGE}Turning off the machine...\nHave a nice day... :)\n{RESET}")
 
         elif choice.lower() == "asset":     # If user chooses 'Asset', display total earnings
-            print(f"Asset: {earning}")
+            print(f"{GOLD}Asset: {earning}\n{RESET}")
 
         elif choice.lower() == "stock":     # If user chooses 'Stock', display available stock
-            print(f"Water: {stock['water']} in ml")
+            print(f"{BLUE}Water: {stock['water']} in ml{RESET}")
             print(f"Sugar: {stock['sugar']} in g")
-            print(f"Milk: {stock['milk']} in ml")
-            print(f"Coffee: {stock['coffee']} in ml\n")
+            print(f"{DARK}Coffee: {stock['coffee']} in ml{RESET}")
+            print(f"Milk: {stock['milk']} in ml\n")
 
         else:    
             coffee = recipe.get(choice.lower())
@@ -72,22 +85,22 @@ def main():
 
                 # Check if there are enough ingredients to make the coffee
                 if resource_check(coffee['ingredients']):
-                    money = int(input(f"Pay: {coffee['cost']}\n"))    # Ask user to pay the required amount
+                    money = int(input(f"{GOLD}Pay: {coffee['cost']}\n{MUSTARD}"))    # Ask user to pay the required amount
 
                     if money >= coffee['cost']: # If enough money is paid
                         earning += coffee['cost'] # Add the money to the earnings
-                        print("Your payment is done... :)\n")
+                        print(f"{DEEP}Your payment is done... :)\n{RESET}")
                         brewing(coffee['ingredients']) # Brew the coffee
                     else:
-                        print("Not enough money. Transaction canceled.... :(")
+                        print(f"{GREEN}Not enough money. Transaction canceled.... :(\n{RESET}")
             else:
-                print("Invalid option. Please choose again..... :(")
+                print(f"{GREEN}Invalid option. Please choose again..... :(\n{RESET}")
 
 # Check if stock is sufficient
 def resource_check(requirements):
     for i in requirements:
         if requirements[i] > stock[i]:
-            print(f"Oops,not sufficient.....{i}....:(")
+            print(f"{GREEN}Oops,not sufficient.....{i}....:({RESET}")
             return False
     return True
 
@@ -95,7 +108,7 @@ def resource_check(requirements):
 def brewing(kaffee):
     for i in kaffee:
         stock[i] -= kaffee[i]
-    print("Here is your Kaffee... :)\n\n")
+    print(f"{GOLD}Here is your {ORANGE}Kaffee{GOLD}... :)\n")
 
 # Start the coffee machine
 main()
