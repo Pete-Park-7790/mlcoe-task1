@@ -1,6 +1,6 @@
 # Dictionary containing recipes for different types of coffee
 recipe = {
-    "latte":{   # Latte recipe with ingredients and cost
+    "latte":{   # Latte recipe and cost
         "ingredients":{
             "water" : 200,
             "sugar" : 100,
@@ -10,7 +10,7 @@ recipe = {
         "cost" : 200
     },
 
-    "espresso":{    # Espresso recipe with ingredients and cost
+    "espresso":{    # Espresso recipe and cost
         "ingredients":{
             "water" : 300,
             "sugar" : 150,
@@ -20,7 +20,7 @@ recipe = {
         "cost" : 300
     },
 
-    "cappuccino":{    # Cappuccino recipe with ingredients and cost
+    "cappuccino":{    # Cappuccino recipe and cost
         "ingredients":{
             "water" : 300,
             "sugar" : 150,
@@ -39,7 +39,7 @@ BLUE = "\033[94m"
 DEEP = "\033[38;5;160m"
 GOLD = "\033[38;5;214m"
 ORANGE = "\033[38;5;202m"
-RESET = "\033[0m"  # Reset color to default
+RESET = "\033[0m" 
 DARK = "\033[31m"
 MUSTARD = "\033[38;5;190m"
 
@@ -48,7 +48,7 @@ MUSTARD = "\033[38;5;190m"
 # Variable to track total earnings
 earning = 0
 
-# Initial stock of ingredients
+# Stock of ingredients
 stock = {
     "water": 1000,
     "sugar": 1000,
@@ -94,7 +94,7 @@ def main():
                     else:
                         print(f"{GREEN}Not enough money. Transaction canceled.... :(\n{RESET}")
             else:
-                print(f"{GREEN}Invalid option. Please choose again..... :(\n{RESET}")
+                print(f"{GREEN}Invalid option. Please choose again...{RESET}")
 
 # Check if stock is sufficient
 def resource_check(requirements):
@@ -108,7 +108,7 @@ def resource_check(requirements):
 def brewing(kaffee):
     for i in kaffee:
         stock[i] -= kaffee[i]
-    print(f"{GOLD}Here is your {ORANGE}Kaffee{GOLD}... :)\n")
+    print(f"{GOLD}Here is your {ORANGE}Kaffee{GOLD}... :)\n{RESET}")
 
 # Start the coffee machine
 main()
